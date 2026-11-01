@@ -9,7 +9,7 @@ name: Pages
 
 on:
   push:
-    branches: [wasm]
+    branches: [wasm, pages-lgffb]
     paths-ignore:
       - "**/*.md"
       - "docs/**"
@@ -30,7 +30,7 @@ defaults:
 jobs:
   build:
     name: Build and test
-    if: github.repository == 'TabStationToo/TabStationToo' && github.ref == 'refs/heads/wasm'
+    if: (github.repository == 'TabStationToo/TabStationToo' && github.ref == 'refs/heads/wasm') || (github.repository == 'sonik-br/TabStationToo' && github.ref == 'refs/heads/pages-lgffb')
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
@@ -145,7 +145,7 @@ jobs:
   deploy-pages:
     name: Deploy to GitHub Pages
     needs: build
-    if: github.repository == 'TabStationToo/TabStationToo' && github.ref == 'refs/heads/wasm'
+    if: (github.repository == 'TabStationToo/TabStationToo' && github.ref == 'refs/heads/wasm') || (github.repository == 'sonik-br/TabStationToo' && github.ref == 'refs/heads/pages-lgffb')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
